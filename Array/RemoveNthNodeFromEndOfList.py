@@ -81,6 +81,48 @@ class Solution(object):
         my_trail.next = my_trail.next.next
         
         return head
+    
+    
+    
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        #这里的头结点是第一个结点
+        #判断链表是否为空
+        if head == None:
+            return head
+        
+        #设置两个标志位
+        cur = head
+        pre = head
+        
+        #cur先走n步
+        while n:
+            cur = cur.next
+            n -= 1    
+            
+        #如果cur为空，则说明n为链表长度
+        if cur == None:
+            return head.next
+        
+        #pre标志位和cur一起走，直到cur走到最后一个结点
+        while cur.next != None:
+            cur = cur.next
+            pre = pre.next
+
+        #删除倒数第n个结点
+        pre.next = pre.next.next
+        return head
 #         list_node = []
 #         my_head = head
 #         while my_head:
