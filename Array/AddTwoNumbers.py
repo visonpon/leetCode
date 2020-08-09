@@ -77,3 +77,24 @@ class Solution(object):
         l2_val = l2.val if l2 else 0
 
         return ((l1_val + l2_val + rest) % 10, (l1_val + l2_val + rest) // 10)
+       
+       
+       
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        f = ListNode(0) #定义输出链表的第一个节点
+        p = f #p类似于指针，代表输出链表的第一个节点
+        carry = 0 #进位
+        while l1 or l2: #判断l1和l2两个链表是否都结束了
+            x = l1.val if l1 else 0 #如果l1链表没结束那么将l1的值给x，否则0给x
+            y = l2.val if l2 else 0
+            res = x + y + carry #与进位一起相加的结果
+            carry = res // 10 #检查是否有进位
+            p.next = ListNode(res%10) #下一个节点的地址给此时的节点
+            p = p.next #这时p指向的是上一行定义的节点
+            l1 = l1.next if l1 else 0 #如果链表l1没有了，那么要给l1赋值0，否则会报l1没有next属性的错
+            l2 = l2.next if l2 else 0
+        if carry > 0: #如果到最后还有进位，那么还要新建个节点记录进位的值
+            p.next = ListNode(1)
+        return f.next #返回的链表一定要从定义的输出链表f的第二个节点开始
+       
